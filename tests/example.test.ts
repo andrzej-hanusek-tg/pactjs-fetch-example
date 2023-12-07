@@ -23,18 +23,14 @@ class DogService {
     });
   };
 
-  public getMeDogsFetch = (from: string, url: string) => {
-    console.log('url', `${url}/dogs?from=${from}`);
-    return fetch(`${url}/dogs?from=${from}`, {
+  public getMeDogsFetch = async (from: string, url: string) => {
+    const res = await fetch(`${url}/dogs?from=${from}`, {
       headers: { Accept: 'application/json' },
       method: 'GET',
-    }).then((res) => {
-      console.log('response', res, res.headers);
-      return {
-        data: res.json(),
-      } as const;
-    });
-  };
+    })
+
+    return res.json()
+  }
 }
 // API Client that will fetch dogs from the Dog API
 // This is the target of our Pact test
@@ -104,8 +100,10 @@ describe('GET /dogs', () => {
       const dogService = new DogService(mockserver.url);
       const response = await dogService.getMeDogsFetch('today', mockserver.url);
 
+      console.log('response', response)
+
       // Assert: check the result
-      expect(response.data[0]).to.deep.eq(dogExample);
+      expect(response).to.deep.eq(dogExample);
     });
   });
 });

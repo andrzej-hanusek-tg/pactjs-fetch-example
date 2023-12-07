@@ -103,7 +103,7 @@ describe('GET /dogs', () => {
       console.log('response', response)
 
       // Assert: check the result
-      expect(response).to.deep.eq(dogExample);
+      expect(response[0]).to.deep.eq(dogExample);
     });
   });
 });

@@ -46,6 +46,50 @@
         },
         "status": 200
       }
+    },
+    {
+      "description": "a request for all dogs with the builder pattern",
+      "providerStates": [
+        {
+          "name": "I have a list of dogs #2"
+        }
+      ],
+      "request": {
+        "headers": {
+          "Accept": "application/json"
+        },
+        "method": "GET",
+        "path": "/dogs",
+        "query": {
+          "from": [
+            "today"
+          ]
+        }
+      },
+      "response": {
+        "body": [
+          {
+            "dog": 1
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "body": {
+            "$": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {}
+        },
+        "status": 200
+      }
     }
   ],
   "metadata": {
